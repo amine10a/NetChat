@@ -29,7 +29,7 @@ Follow these steps to install and run the Chat application:
     ```bash
     cd chat
     ```
-2. **Running the **:
+3. **Running the **:
   ```bash
     python chat_udp.py
     or
@@ -41,10 +41,10 @@ You must run scripts in two different windows in local host, or you can change t
   
   
   
-3. **Install Dependencies**: 
+4. **Install Dependencies**: 
     Check if the project has any dependencies or requirements that need to be installed. Typically, you can find this information in a `requirements.txt` file or within the project documentation.
 
-4. **Setup Environment (if applicable)**: 
+5. **Setup Environment (if applicable)**: 
     Some projects may require setting up environment variables or configurations.
 
 . **Troubleshooting**: 
