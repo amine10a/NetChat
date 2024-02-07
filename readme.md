@@ -22,12 +22,12 @@ Follow these steps to install and run the Chat application:
 
 1. **Clone the Repository**: 
     ```bash
-    git clone https://github.com/amine10a/chat
+    git clone https://github.com/amine10a/NetChat
     ```
 
 2. **Navigate to the Project Directory**: 
     ```bash
-    cd chat
+    cd NetChat
     ```
 3. **Running the **:
   ```bash
