@@ -3,7 +3,7 @@ import requests
 from datetime import datetime
 
 port = 5555
-ip = "192.168.0.157"  # Use loopback address for testing
+ip = "127.0.0.1"  
 address = (ip, port)
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
