@@ -15,3 +15,38 @@ This project is designed to assist novice network security researchers in unders
 
 ### Analysis and Debugging
 - Utilizes powerful tools like Wireshark for network traffic analysis and debugging, facilitating optimal performance and troubleshooting.
+
+- # Installation Guide
+
+Follow these steps to install and run the Chat application:
+
+1. **Clone the Repository**: 
+    ```bash
+    git clone https://github.com/amine10a/chat
+    ```
+
+2. **Navigate to the Project Directory**: 
+    ```bash
+    cd chat
+    ```
+2. **Running the **:
+  ```bash
+    python chat_udp.py
+    or
+    python chat_tcp.py
+    
+  ```
+You must run scripts in two different windows in local host, or you can change the IP and run it in two different machines.
+  
+  
+  
+  
+3. **Install Dependencies**: 
+    Check if the project has any dependencies or requirements that need to be installed. Typically, you can find this information in a `requirements.txt` file or within the project documentation.
+
+4. **Setup Environment (if applicable)**: 
+    Some projects may require setting up environment variables or configurations.
+
+. **Troubleshooting**: 
+    If you encounter any issues during the installation or setup process, refer to the project's issue tracker. You can also reach out to the project maintainers or community for assistance.
+
