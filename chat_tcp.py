@@ -3,14 +3,14 @@ import requests
 from datetime import datetime
 
 port = 5555
-ip = "192.168.0.157"  # my ip if I need to be the server
+ip = "127.0.0.1"  
 address = (ip, port)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def server(address):
     try:
         s.bind(address)
-        s.listen(1)  # Listen for incoming connections
+        s.listen(1)  # Listening  
         print("[*]: Server up and listening")
         conn, client_address = s.accept()
         with conn:
