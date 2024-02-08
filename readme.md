@@ -1,5 +1,7 @@
 # Network Chat Application
+<p align="center">
 <img src="cover.jpeg" alt="Alt text" width="600" height="400">
+</p>
 This project is designed to assist novice network security researchers in understanding and learning how to implement TCP and UDP protocols to establish a direct chat between two devices without an intermediary. It serves as a crucial component of learning practical networking and information security, as it necessitates a thorough understanding of communication protocols and their distinctions.
 
 ## Features
