@@ -2,74 +2,73 @@ import socket
 import requests
 from datetime import datetime
 
-port = 5555
-ip = "127.0.0.1"  
-address = (ip, port)
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def server(address):
-    try:
-        s.bind(address)
-        s.listen(1)  # Listening  
-        print("[*]: Server up and listening")
-        conn, client_address = s.accept()
-        with conn:
-            print("Connected by", client_address)
-            while True:
-                data = conn.recv(1024)
-                if not data:
-                    break
-                print("Message from {} {}: \n {} ".format(client_address, str(datetime.now()), data.decode("utf-8")))
-                print("-----------------")
-                msg = input("Write your message: ")
-                print("-----------------")
-                conn.sendall(msg.encode("utf-8"))
-    except OSError as e:
-        print("Error binding to address:", e)
-        return
-    except Exception as e:
-        print("Error:", e)
+    # Use context manager to handle socket connection
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.bind(address)
+            s.listen(1)  # Start listening for connections
+            print(f"[*] Server is up and listening at {address}")
+            
+            # Accept connection from a client
+            conn, client_address = s.accept()
+            print(f"[*] Connection established with {client_address}")
+            
+            with conn:
+                while True:
+                    data = conn.recv(1024)
+                    if not data:
+                        print(f"[*] Connection with {client_address} closed.")
+                        break
+                    print(f"[*] Received message from {client_address} at {datetime.now()}:\n{data.decode('utf-8')}")
+                    print("-----------------")
+                    
+                    response = input("Write your response: ")
+                    print("-----------------")
+                    conn.sendall(response.encode("utf-8"))
+        except Exception as e:
+            print(f"[*] Server error: {e}")
+
 
 def client(address):
-    try:
-        s.connect(address)
-        print("[*]: Connected to server")
-        while True:
-            print("-----------------")
-            msg = input("Write your message: ")
-            print("-----------------")
-            s.sendall(msg.encode("utf-8"))
-            data = s.recv(1024)
-            print("Message from server {}: \n {} ".format(str(datetime.now()), data.decode("utf-8")))
-    except Exception as e:
-        print("Error:", e)
-    finally:
-        s.close()
+    # Use context manager to handle socket connection
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.connect(address)
+            print(f"[*] Connected to server at {address}")
+            
+            while True:
+                print("-----------------")
+                message = input("Write your message: ")
+                print("-----------------")
+                
+                s.sendall(message.encode("utf-8"))
+                data = s.recv(1024)
+                print(f"[*] Received response from server at {datetime.now()}:\n{data.decode('utf-8')}")
+        except Exception as e:
+            print(f"[*] Client error: {e}")
 
-def get_ip():
-    try:
-        response = requests.get('https://httpbin.org/ip')
-        if response.status_code == 200:
-            data = response.json()
-            return str(data['origin'])
-        else:
-            return "Failed to fetch IP address"
-    except Exception as e:
-        print("Error:", e)
-        return None
 
 def main():
-    c = 0
-    while c < 1 or c > 2:
-        print("You want to be the [1]Server or [2]Client")
-        c = int(input("choose : "))
-
-    if c == 1:
-        #ip = get_ip()
-        address = (ip, port)
+    port = 5555
+    ip = "127.0.0.1"
+    address = (ip, port)
+    
+    # Prompt user to choose whether to be a server or client
+    choice = None
+    while choice not in {1, 2}:
+        try:
+            choice = int(input("Choose [1] Server or [2] Client: "))
+        except ValueError:
+            print("Invalid choice. Please enter 1 for Server or 2 for Client.")
+    
+    # Execute based on user choice
+    if choice == 1:
         server(address)
-    elif c == 2:
-        address = (ip, port)
+    elif choice == 2:
         client(address)
 
-main()
+
+if __name__ == "__main__":
+    main()
